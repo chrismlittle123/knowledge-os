@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KnowledgeOS - A Vision for AI-Native Knowledge Work</title>
+  <style>
+    @page {
+      size: 960px 540px;
+      margin: 0;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #1a1a2e;
+      color: #ffffff;
+    }
+    
+    .slide {
+      width: 960px;
+      height: 540px;
+      position: relative;
+      overflow: hidden;
+      page-break-after: always;
+      background: #1a1a2e;
+      padding: 32px 40px;
+    }
+    
+    .slide:last-child {
+      page-break-after: auto;
+    }
+    
+    /* Colors */
+    .coral { color: #ff6b6b; }
+    .teal { color: #4ecdc4; }
+    .yellow { color: #feca57; }
+    .muted { color: #c4c4c4; }
+    .subtle { color: #8a8aaa; }
+    .white { color: #ffffff; }
+    
+    .bg-dark { background: #16213e; }
+    .bg-coral { background: #ff6b6b; }
+    .bg-teal { background: #4ecdc4; }
+    .bg-yellow { background: #feca57; }
+    .bg-gradient { background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%); }
+    
+    /* Typography */
+    h1 {
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+    
+    h2 {
+      font-family: Georgia, serif;
+      font-weight: 700;
+    }
+    
+    h3 {
+      font-family: Georgia, serif;
+      font-weight: 600;
+    }
+    
+    .uppercase {
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    
+    .mono {
+      font-family: 'Courier New', monospace;
+    }
+    
+    /* Layout */
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .items-start { align-items: flex-start; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .gap-8 { gap: 8px; }
+    .gap-12 { gap: 12px; }
+    .gap-16 { gap: 16px; }
+    .gap-20 { gap: 20px; }
+    .gap-24 { gap: 24px; }
+    .flex-1 { flex: 1; }
+    
+    /* Components */
+    .slide-number {
+      position: absolute;
+      bottom: 16px;
+      right: 40px;
+      font-size: 13px;
+      color: #8a8aaa;
+    }
+    
+    .card {
+      background: #16213e;
+      border-radius: 12px;
+      padding: 16px;
+    }
+    
+    .pill {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .component-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+    
+    .loop-arrow {
+      color: #4a4a6a;
+      font-size: 20px;
+    }
+    
+    .data-flow {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      padding: 8px 12px;
+      background: rgba(78, 205, 196, 0.1);
+      border-radius: 8px;
+      border-left: 3px solid #4ecdc4;
+    }
+    
+    /* Decorative */
+    .diagonal-coral {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 300px;
+      height: 300px;
+      background: linear-gradient(135deg, transparent 50%, #ff6b6b 50%);
+      opacity: 0.2;
+    }
+    
+    .diagonal-teal {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(-45deg, transparent 50%, #4ecdc4 50%);
+      opacity: 0.2;
+    }
+    
+    .corner-accent {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      border: 3px solid;
+      opacity: 0.3;
+    }
+    
+    .corner-tl {
+      top: 20px;
+      left: 20px;
+      border-right: none;
+      border-bottom: none;
+      border-color: #4ecdc4;
+    }
+    
+    .corner-br {
+      bottom: 20px;
+      right: 20px;
+      border-left: none;
+      border-top: none;
+      border-color: #ff6b6b;
+    }
+
+    /* Stage boxes */
+    .stage-box {
+      padding: 12px 16px;
+      border-radius: 10px;
+      text-align: center;
+      min-width: 100px;
+    }
+    
+    .stage-context { background: rgba(255, 107, 107, 0.2); border: 2px solid #ff6b6b; }
+    .stage-specs { background: rgba(78, 205, 196, 0.2); border: 2px solid #4ecdc4; }
+    .stage-artefacts { background: rgba(254, 202, 87, 0.2); border: 2px solid #feca57; }
+    .stage-value { background: rgba(255, 107, 107, 0.2); border: 2px solid #ff6b6b; }
+    
+    /* Component colors */
+    .captura { background: #ff6b6b; color: #1a1a2e; }
+    .sapien { background: #4ecdc4; color: #1a1a2e; }
+    .architecta { background: #feca57; color: #1a1a2e; }
+    .fabrica { background: #a29bfe; color: #1a1a2e; }
+    .impacto { background: #fd79a8; color: #1a1a2e; }
+    .opera { background: #ffffff; color: #1a1a2e; }
+    
+    .border-captura { border-color: #ff6b6b; }
+    .border-sapien { border-color: #4ecdc4; }
+    .border-architecta { border-color: #feca57; }
+    .border-fabrica { border-color: #a29bfe; }
+    .border-impacto { border-color: #fd79a8; }
+    .border-opera { border-color: #ffffff; }
+    
+    .text-captura { color: #ff6b6b; }
+    .text-sapien { color: #4ecdc4; }
+    .text-architecta { color: #feca57; }
+    .text-fabrica { color: #a29bfe; }
+    .text-impacto { color: #fd79a8; }
+    
+    @media print {
+      body { background: white; }
+      .slide { margin: 0; box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SLIDE 1: Title -->
+  <div class="slide flex flex-col items-center justify-center" style="padding: 0;">
+    <div class="diagonal-coral"></div>
+    <div class="diagonal-teal"></div>
+    
+    <div style="position: relative; z-index: 1; text-align: center;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 24px;">A Vision for AI-Native Knowledge Work</p>
+      <h1 style="font-size: 64px; line-height: 1.1; margin-bottom: 16px;">Knowledge<span class="coral">OS</span></h1>
+      <p class="muted" style="font-size: 18px; max-width: 500px; line-height: 1.5;">The operating system for organisations where AI is the principal actor.</p>
+      
+      <div style="margin-top: 48px; padding: 14px 28px; background: #16213e; border-radius: 8px; display: inline-block;">
+        <p style="font-size: 18px; font-family: 'Courier New', monospace; color: #ffffff;">Not sci-fi. We just haven't built it yet.</p>
+      </div>
+    </div>
+    
+    <div style="position: absolute; bottom: 24px; text-align: center; width: 100%;">
+      <p class="subtle" style="font-size: 13px;">Palindrom • Internal Vision Document • 2026</p>
+    </div>
+  </div>
+
+  <!-- SLIDE 2: What is Knowledge Work? -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 20px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The Foundation</p>
+      <h1 style="font-size: 36px;">What is Knowledge Work?</h1>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col gap-16" style="flex: 1;">
+        <div class="card flex gap-16 items-start">
+          <div class="component-icon" style="background: rgba(255, 107, 107, 0.2);">📚</div>
+          <div>
+            <h3 class="coral" style="font-size: 16px; margin-bottom: 6px;">Context</h3>
+            <p class="muted" style="font-size: 13px; line-height: 1.5;">The combination of tribal knowledge, client relationships, historical data, and institutional memory.</p>
+          </div>
+        </div>
+        
+        <div class="card flex gap-16 items-start">
+          <div class="component-icon" style="background: rgba(78, 205, 196, 0.2);">📐</div>
+          <div>
+            <h3 class="teal" style="font-size: 16px; margin-bottom: 6px;">Specifications</h3>
+            <p class="muted" style="font-size: 13px; line-height: 1.5;">The blueprints, requirements, and decisions that define what we're building.</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-16" style="flex: 1;">
+        <div class="card flex gap-16 items-start">
+          <div class="component-icon" style="background: rgba(254, 202, 87, 0.2);">📦</div>
+          <div>
+            <h3 class="yellow" style="font-size: 16px; margin-bottom: 6px;">Artefacts</h3>
+            <p class="muted" style="font-size: 13px; line-height: 1.5;">The digital outputs: source code, documents, PDFs, dashboards, reports.</p>
+          </div>
+        </div>
+        
+        <div class="card flex gap-16 items-start">
+          <div class="component-icon" style="background: rgba(253, 121, 168, 0.2);">💎</div>
+          <div>
+            <h3 style="font-size: 16px; margin-bottom: 6px; color: #fd79a8;">Value</h3>
+            <p class="muted" style="font-size: 13px; line-height: 1.5;">What we ultimately deliver to clients and users. The outcome that matters.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <p class="subtle" style="font-size: 14px; margin-top: 16px;">These four elements form a continuous cycle in every knowledge organisation.</p>
+    <span class="slide-number">2</span>
+  </div>
+
+  <!-- SLIDE 3: The Loop -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 8px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The Core Insight</p>
+      <h1 style="font-size: 36px;">The Loop</h1>
+    </div>
+    
+    <div class="flex flex-1 gap-20">
+      <!-- Left side: The Wheel -->
+      <div class="flex items-center justify-center" style="flex: 1.2;">
+        <div style="position: relative; width: 340px; height: 340px;">
+          <!-- Outer ring -->
+          <div style="position: absolute; top: 0; left: 0; width: 340px; height: 340px; border: 3px solid #2a2a4a; border-radius: 50%;"></div>
+          
+          <!-- Rotating arrows (implied by gradient arc) -->
+          <div style="position: absolute; top: 10px; left: 10px; width: 320px; height: 320px; border-radius: 50%; border: 4px dashed #3a3a5a; opacity: 0.5;"></div>
+          
+          <!-- Context - Top -->
+          <div style="position: absolute; top: -8px; left: 50%; transform: translateX(-50%); text-align: center;">
+            <div style="background: #ff6b6b; color: #1a1a2e; padding: 12px 24px; border-radius: 25px; font-family: Georgia, serif; font-weight: bold; font-size: 15px; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);">
+              CONTEXT
+            </div>
+            <p style="font-family: Georgia, serif; font-size: 12px; color: #ff6b6b; margin-top: 6px; font-style: italic;">Raw knowledge</p>
+          </div>
+          
+          <!-- Specifications - Right -->
+          <div style="position: absolute; right: -24px; top: 50%; transform: translateY(-50%); text-align: center;">
+            <div style="background: #4ecdc4; color: #1a1a2e; padding: 12px 20px; border-radius: 25px; font-family: Georgia, serif; font-weight: bold; font-size: 15px; box-shadow: 0 4px 15px rgba(78, 205, 196, 0.3);">
+              SPECS
+            </div>
+            <p style="font-family: Georgia, serif; font-size: 12px; color: #4ecdc4; margin-top: 6px; font-style: italic;">Blueprints</p>
+          </div>
+          
+          <!-- Artefacts - Bottom -->
+          <div style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); text-align: center;">
+            <div style="background: #feca57; color: #1a1a2e; padding: 12px 20px; border-radius: 25px; font-family: Georgia, serif; font-weight: bold; font-size: 15px; box-shadow: 0 4px 15px rgba(254, 202, 87, 0.3);">
+              ARTEFACTS
+            </div>
+            <p style="font-family: Georgia, serif; font-size: 12px; color: #feca57; margin-top: 6px; font-style: italic;">Digital outputs</p>
+          </div>
+          
+          <!-- Value - Left -->
+          <div style="position: absolute; left: -16px; top: 50%; transform: translateY(-50%); text-align: center;">
+            <div style="background: #fd79a8; color: #1a1a2e; padding: 12px 20px; border-radius: 25px; font-family: Georgia, serif; font-weight: bold; font-size: 15px; box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3);">
+              VALUE
+            </div>
+            <p style="font-family: Georgia, serif; font-size: 12px; color: #fd79a8; margin-top: 6px; font-style: italic;">Outcomes</p>
+          </div>
+          
+          <!-- Arrows following the circular path CLOCKWISE -->
+          
+          <!-- Top-right: Context → Specs (curving down-right) -->
+          <div style="position: absolute; top: 85px; right: 85px; text-align: center;">
+            <p style="font-family: 'Courier New', monospace; font-size: 13px; color: #ffffff; margin-bottom: 8px;">defining</p>
+            <span style="color: #ffffff; font-size: 26px;">↘</span>
+          </div>
+          
+          <!-- Bottom-right: Specs → Artefacts (curving down-left) -->
+          <div style="position: absolute; bottom: 85px; right: 85px; text-align: center;">
+            <p style="font-family: 'Courier New', monospace; font-size: 13px; color: #ffffff; margin-bottom: 8px;">building</p>
+            <span style="color: #ffffff; font-size: 26px;">↙</span>
+          </div>
+          
+          <!-- Bottom-left: Artefacts → Value (curving up-left) -->
+          <div style="position: absolute; bottom: 85px; left: 85px; text-align: center;">
+            <p style="font-family: 'Courier New', monospace; font-size: 13px; color: #ffffff; margin-bottom: 8px;">delivering</p>
+            <span style="color: #ffffff; font-size: 26px;">↖</span>
+          </div>
+          
+          <!-- Top-left: Value → Context (curving up-right) -->
+          <div style="position: absolute; top: 85px; left: 85px; text-align: center;">
+            <p style="font-family: 'Courier New', monospace; font-size: 13px; color: #ffffff; margin-bottom: 8px;">learning</p>
+            <span style="color: #ffffff; font-size: 26px;">↗</span>
+          </div>
+          
+          <!-- Center text -->
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+            <p style="font-family: Georgia, serif; font-size: 28px; color: #ffffff; font-weight: 700;">∞</p>
+            <p style="font-family: 'Courier New', monospace; font-size: 11px; color: #6a6a8a; margin-top: 4px;">continuous</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Right side: Key metrics -->
+      <div class="flex flex-col justify-center gap-16" style="flex: 0.8;">
+        <div>
+          <p style="font-family: Georgia, serif; font-size: 18px; color: #ffffff; margin-bottom: 12px; font-style: italic;">What makes the loop effective?</p>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #ff6b6b; padding: 16px 20px;">
+          <div class="flex items-center gap-12">
+            <span style="font-size: 28px; color: #ff6b6b;">↑</span>
+            <div>
+              <p style="font-family: Georgia, serif; font-size: 18px; font-weight: bold; color: #ff6b6b;">Velocity</p>
+              <p class="muted" style="font-size: 13px; font-family: 'Courier New', monospace;">cycles completed / time</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #4ecdc4; padding: 16px 20px;">
+          <div class="flex items-center gap-12">
+            <span style="font-size: 28px; color: #4ecdc4;">↓</span>
+            <div>
+              <p style="font-family: Georgia, serif; font-size: 18px; font-weight: bold; color: #4ecdc4;">Waste</p>
+              <p class="muted" style="font-size: 13px; font-family: 'Courier New', monospace;">effort without value</p>
+            </div>
+          </div>
+        </div>
+        
+        <div style="padding: 16px 20px; background: rgba(254, 202, 87, 0.1); border: 2px solid #feca57; border-radius: 12px;">
+          <p style="font-family: 'Courier New', monospace; font-size: 16px; color: #feca57; margin-bottom: 4px;">OPERATIONS =</p>
+          <p style="font-family: Georgia, serif; font-size: 16px; color: #ffffff; line-height: 1.5;">Building systems that maximize velocity and minimize waste.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">3</span>
+  </div>
+
+  <!-- SLIDE 4: Introducing KnowledgeOS -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 20px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The System</p>
+      <h1 style="font-size: 36px;">Introducing Knowledge<span class="coral">OS</span></h1>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col justify-center" style="flex: 1;">
+        <p style="font-size: 16px; line-height: 1.7; margin-bottom: 20px;">
+          KnowledgeOS is the <span class="teal">operating system</span> for AI-native organisations.
+        </p>
+        <p class="muted" style="font-size: 14px; line-height: 1.7; margin-bottom: 20px;">
+          It's a unified platform where AI agents are the principal actors in every stage of the knowledge work loop—with humans providing oversight, creativity, and strategic direction.
+        </p>
+        <p class="muted" style="font-size: 14px; line-height: 1.7;">
+          Not a tool. Not an assistant. <span class="coral">An operating system.</span>
+        </p>
+      </div>
+      
+      <div class="flex flex-col gap-12" style="flex: 1;">
+        <div class="card" style="border-left: 4px solid #ff6b6b;">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">Repository</p>
+          <p class="muted" style="font-size: 14px;">Captures and centralizes raw data and tribal knowledge</p>
+        </div>
+        <div class="card" style="border-left: 4px solid #4ecdc4;">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">Synthesis Workspace</p>
+          <p class="muted" style="font-size: 14px;">Filters context into actionable blueprints and decisions</p>
+        </div>
+        <div class="card" style="border-left: 4px solid #feca57;">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">Execution Platform</p>
+          <p class="muted" style="font-size: 14px;">Coordinates technical building of digital outputs</p>
+        </div>
+        <div class="card" style="border-left: 4px solid #fd79a8;">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 4px;">Feedback Loop</p>
+          <p class="muted" style="font-size: 14px;">Measures impact and archives lessons learned</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">4</span>
+  </div>
+
+  <!-- SLIDE 5: The 5 Components Overview -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 16px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The Architecture</p>
+      <h1 style="font-size: 36px;">The 5 Core Components</h1>
+    </div>
+    
+    <!-- Opera wrapper - the all-seeing container -->
+    <div style="position: relative; flex: 1; padding: 16px; margin-bottom: 16px;">
+      <!-- Opera border glow effect -->
+      <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 20px; box-shadow: 0 0 30px rgba(255, 255, 255, 0.1), inset 0 0 30px rgba(255, 255, 255, 0.02);"></div>
+      
+      <!-- Opera label - top left -->
+      <div style="position: absolute; top: -14px; left: 32px; background: #1a1a2e; padding: 4px 16px; display: flex; align-items: center; gap: 10px;">
+        <span style="font-size: 24px;">👁️</span>
+        <span style="font-family: Georgia, serif; font-size: 18px; font-weight: bold; color: #ffffff;">Opera</span>
+        <span class="muted" style="font-size: 13px; font-style: italic;">— observes all</span>
+      </div>
+      
+      <!-- Opera metrics - top right -->
+      <div style="position: absolute; top: -14px; right: 32px; background: #1a1a2e; padding: 4px 16px; display: flex; align-items: center; gap: 16px;">
+        <span style="font-family: 'Courier New', monospace; font-size: 12px; color: #ff6b6b;">↑ velocity</span>
+        <span style="font-family: 'Courier New', monospace; font-size: 12px; color: #4ecdc4;">↓ waste</span>
+      </div>
+      
+      <!-- The 5 component cards inside Opera -->
+      <div class="flex gap-12" style="padding: 24px 8px 8px 8px; height: 100%;">
+        <div class="card flex flex-col items-center" style="flex: 1; text-align: center; padding: 20px 12px;">
+          <div class="component-icon captura" style="margin-bottom: 12px;">📥</div>
+          <h3 class="text-captura" style="font-family: Georgia, serif; font-size: 16px; margin-bottom: 8px;">Captura</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.4;">Data ingestion, enrichment & exploration</p>
+        </div>
+        
+        <div class="card flex flex-col items-center" style="flex: 1; text-align: center; padding: 20px 12px;">
+          <div class="component-icon sapien" style="margin-bottom: 12px;">🧠</div>
+          <h3 class="text-sapien" style="font-family: Georgia, serif; font-size: 16px; margin-bottom: 8px;">Sapien</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.4;">Transforms data into knowledge base</p>
+        </div>
+        
+        <div class="card flex flex-col items-center" style="flex: 1; text-align: center; padding: 20px 12px;">
+          <div class="component-icon architecta" style="margin-bottom: 12px;">📐</div>
+          <h3 class="text-architecta" style="font-family: Georgia, serif; font-size: 16px; margin-bottom: 8px;">Architecta</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.4;">Applies intelligence & wisdom to create specs</p>
+        </div>
+        
+        <div class="card flex flex-col items-center" style="flex: 1; text-align: center; padding: 20px 12px;">
+          <div class="component-icon fabrica" style="margin-bottom: 12px;">🏭</div>
+          <h3 class="text-fabrica" style="font-family: Georgia, serif; font-size: 16px; margin-bottom: 8px;">Fabrica</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.4;">Transforms specifications into artefacts</p>
+        </div>
+        
+        <div class="card flex flex-col items-center" style="flex: 1; text-align: center; padding: 20px 12px;">
+          <div class="component-icon impacto" style="margin-bottom: 12px;">📊</div>
+          <h3 class="text-impacto" style="font-family: Georgia, serif; font-size: 16px; margin-bottom: 8px;">Impacto</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.4;">Measures value & feeds learnings back</p>
+        </div>
+      </div>
+      
+      <!-- Connection lines suggestion at bottom -->
+      <div style="position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; background: #1a1a2e; padding: 2px 12px;">
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #ff6b6b, #4ecdc4);"></div>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #4ecdc4, #feca57);"></div>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #feca57, #a29bfe);"></div>
+        <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #a29bfe, #fd79a8);"></div>
+      </div>
+    </div>
+    
+    <span class="slide-number">5</span>
+  </div>
+
+  <!-- SLIDE 6: Captura Deep Dive -->
+  <div class="slide flex flex-col">
+    <div class="flex items-center gap-16" style="margin-bottom: 20px;">
+      <div class="component-icon captura" style="width: 56px; height: 56px; font-size: 26px;">📥</div>
+      <div>
+        <p class="text-captura uppercase" style="font-size: 13px; margin-bottom: 4px;">Component 1</p>
+        <h1 style="font-size: 36px;">Captura</h1>
+      </div>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col" style="flex: 1;">
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+          The <span class="text-captura">data layer</span>. Captura handles all data ingestion, transformation, enrichment, and storage from external sources.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border: 1px solid rgba(255, 107, 107, 0.4);">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 12px;">Core Functions</p>
+          <div class="flex flex-col" style="gap: 10px;">
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Connect to diverse data sources (APIs, files, streams)</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Transform and normalize incoming data</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Enable exploration and discovery</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Supply research data during design phase</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Route data requests from other components</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-12" style="flex: 1;">
+        <div class="card" style="border-left: 4px solid #4ecdc4;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Sends Data To</p>
+          <div class="flex gap-8">
+            <span class="pill sapien" style="font-size: 13px;">Sapien</span>
+            <span class="pill architecta" style="font-size: 13px;">Architecta</span>
+            <span class="pill impacto" style="font-size: 13px;">Impacto (routes)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #ff6b6b;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Receives Data From</p>
+          <div class="flex gap-8">
+            <span class="pill" style="background: #4a4a6a; font-size: 13px;">External Sources</span>
+            <span class="pill impacto" style="font-size: 13px;">Impacto (requests)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="background: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255, 107, 107, 0.3);">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Key Relationships</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">Works closely with Impacto (feedback loop) and Architecta (research). When Architecta needs external data for design decisions, Captura sources it just-in-time.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">6</span>
+  </div>
+
+  <!-- SLIDE 7: Sapien Deep Dive -->
+  <div class="slide flex flex-col">
+    <div class="flex items-center gap-16" style="margin-bottom: 20px;">
+      <div class="component-icon sapien" style="width: 56px; height: 56px; font-size: 26px;">🧠</div>
+      <div>
+        <p class="text-sapien uppercase" style="font-size: 13px; margin-bottom: 4px;">Component 2</p>
+        <h1 style="font-size: 36px;">Sapien</h1>
+      </div>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col" style="flex: 1;">
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+          The <span class="text-sapien">knowledge layer</span>. Sapien transforms raw data into a structured, queryable knowledge base that the organization can reason over.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border: 1px solid rgba(78, 205, 196, 0.4);">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 12px;">Core Functions</p>
+          <div class="flex flex-col" style="gap: 10px;">
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Structure and index incoming data</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Maintain knowledge graph relationships</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Answer queries ("How much did we sell last week?")</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Delete, update, or archive outdated knowledge</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-12" style="flex: 1;">
+        <div class="card" style="border-left: 4px solid #4ecdc4;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Sends Data To</p>
+          <div class="flex gap-8">
+            <span class="pill architecta" style="font-size: 13px;">Architecta</span>
+            <span class="pill impacto" style="font-size: 13px;">Impacto (benchmarks)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #ff6b6b;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Receives Data From</p>
+          <div class="flex gap-8">
+            <span class="pill captura" style="font-size: 13px;">Captura</span>
+            <span class="pill impacto" style="font-size: 13px;">Impacto (corrections)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="background: rgba(78, 205, 196, 0.1); border: 1px solid rgba(78, 205, 196, 0.3);">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Error Correction Role</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">When Impacto detects that an outcome didn't match expectations, Sapien corrects the knowledge base.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">7</span>
+  </div>
+
+  <!-- SLIDE 8: Architecta & Fabrica -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 16px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">Components 3 & 4</p>
+      <h1 style="font-size: 36px;">Architecta & Fabrica</h1>
+    </div>
+    
+    <div class="flex gap-20 flex-1">
+      <!-- Architecta -->
+      <div class="flex flex-col" style="flex: 1;">
+        <div class="flex items-center gap-12" style="margin-bottom: 16px;">
+          <div class="component-icon architecta" style="font-size: 22px;">📐</div>
+          <h3 class="text-architecta" style="font-size: 18px;">Architecta</h3>
+        </div>
+        
+        <p class="muted" style="font-size: 13px; line-height: 1.5; margin-bottom: 16px;">
+          Takes knowledge and applies <span class="text-architecta">intelligence and wisdom</span> to produce specifications—the blueprints for what gets built.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border-left: 4px solid #feca57;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Sends To</p>
+          <span class="pill fabrica" style="font-size: 13px;">Fabrica (blueprints)</span>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #feca57;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Receives From</p>
+          <div class="flex gap-8">
+            <span class="pill sapien" style="font-size: 13px;">Sapien (knowledge)</span>
+            <span class="pill captura" style="font-size: 13px;">Captura (research)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="margin-top: 12px; background: rgba(254, 202, 87, 0.1); border: 1px solid rgba(254, 202, 87, 0.3);">
+          <p class="muted" style="font-size: 13px; line-height: 1.4;"><strong>Prevention role:</strong> Updates SOPs so errors aren't designed into future projects.</p>
+        </div>
+      </div>
+      
+      <!-- Arrow -->
+      <div class="flex flex-col items-center justify-center" style="padding: 0 8px;">
+        <div style="font-size: 32px; color: #4a4a6a;">→</div>
+        <p class="muted" style="font-size: 14px; margin-top: 4px;">Blueprint</p>
+      </div>
+      
+      <!-- Fabrica -->
+      <div class="flex flex-col" style="flex: 1;">
+        <div class="flex items-center gap-12" style="margin-bottom: 16px;">
+          <div class="component-icon fabrica" style="font-size: 22px;">🏭</div>
+          <h3 class="text-fabrica" style="font-size: 18px;">Fabrica</h3>
+        </div>
+        
+        <p class="muted" style="font-size: 13px; line-height: 1.5; margin-bottom: 16px;">
+          The <span class="text-fabrica">execution engine</span>. Takes specifications and produces the actual artefacts—code, documents, reports, dashboards.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border-left: 4px solid #a29bfe;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Sends To</p>
+          <span class="pill impacto" style="font-size: 13px;">Impacto (artefacts)</span>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #a29bfe;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 4px;">Receives From</p>
+          <span class="pill architecta" style="font-size: 13px;">Architecta (specs)</span>
+        </div>
+        
+        <div class="card" style="margin-top: 12px; background: rgba(162, 155, 254, 0.1); border: 1px solid rgba(162, 155, 254, 0.3);">
+          <p class="muted" style="font-size: 13px; line-height: 1.4;"><strong>Also known as:</strong> Magpie. This is where AI builds things.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">8</span>
+  </div>
+
+  <!-- SLIDE 9: Impacto Deep Dive -->
+  <div class="slide flex flex-col">
+    <div class="flex items-center gap-16" style="margin-bottom: 20px;">
+      <div class="component-icon impacto" style="width: 56px; height: 56px; font-size: 26px;">📊</div>
+      <div>
+        <p class="text-impacto uppercase" style="font-size: 13px; margin-bottom: 4px;">Component 5</p>
+        <h1 style="font-size: 36px;">Impacto</h1>
+      </div>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col" style="flex: 1;">
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+          The <span class="text-impacto">measurement & learning layer</span>. Impacto closes the loop—turning artefacts into measurable value and feeding learnings back into the system.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border: 1px solid rgba(253, 121, 168, 0.4);">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 12px;">Core Functions</p>
+          <div class="flex flex-col" style="gap: 10px;">
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Measure impact of delivered artefacts</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Detect when outcomes don't match expectations</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Request additional data from Captura</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Signal corrections to Sapien</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-12" style="flex: 1;">
+        <div class="card" style="border-left: 4px solid #4ecdc4;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Sends Data To</p>
+          <div class="flex gap-8 flex-wrap">
+            <span class="pill captura" style="font-size: 13px;">Captura (requests)</span>
+            <span class="pill sapien" style="font-size: 13px;">Sapien (corrections)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #ff6b6b;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Receives Data From</p>
+          <div class="flex gap-8">
+            <span class="pill fabrica" style="font-size: 13px;">Fabrica (artefacts)</span>
+            <span class="pill captura" style="font-size: 13px;">Captura (data)</span>
+          </div>
+        </div>
+        
+        <div class="card" style="background: rgba(253, 121, 168, 0.1); border: 1px solid rgba(253, 121, 168, 0.3);">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">The Loop Closer</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">Impacto is what makes this a cycle, not a pipeline. Without it, there's no learning.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">9</span>
+  </div>
+
+  <!-- SLIDE 10: Opera - The Orchestration Layer -->
+  <div class="slide flex flex-col">
+    <div class="flex items-center gap-16" style="margin-bottom: 20px;">
+      <div class="component-icon opera" style="width: 56px; height: 56px; font-size: 26px;">👁️</div>
+      <div>
+        <p class="uppercase" style="font-size: 13px; margin-bottom: 4px; color: #ffffff;">The Orchestration Layer</p>
+        <h1 style="font-size: 36px;">Opera</h1>
+      </div>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col" style="flex: 1;">
+        <p style="font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
+          The <span style="color: #ffffff; font-weight: bold;">all-seeing eye</span>. Opera sits above all five components, monitoring the entire system to optimize loop velocity and minimize resource waste.
+        </p>
+        
+        <div class="card" style="margin-bottom: 12px; border: 1px solid rgba(255, 255, 255, 0.3);">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 12px;">Core Functions</p>
+          <div class="flex flex-col" style="gap: 10px;">
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Monitor all component health and throughput</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Identify bottlenecks in the loop</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Allocate resources dynamically</p>
+            <p style="font-size: 14px; font-family: 'Courier New', monospace; color: #ffffff;">• Flag anomalies and inefficiencies</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col justify-center" style="flex: 1;">
+        <div class="card" style="background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255, 255, 255, 0.3); text-align: center; padding: 24px;">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 16px;">Opera Observes Everything</p>
+          <div class="flex justify-center gap-8 flex-wrap">
+            <span class="pill captura" style="font-size: 14px;">Captura</span>
+            <span class="pill sapien" style="font-size: 14px;">Sapien</span>
+            <span class="pill architecta" style="font-size: 14px;">Architecta</span>
+            <span class="pill fabrica" style="font-size: 14px;">Fabrica</span>
+            <span class="pill impacto" style="font-size: 14px;">Impacto</span>
+          </div>
+          <p class="muted" style="font-size: 14px; margin-top: 16px; line-height: 1.5;">No direct data flow. Pure observation and orchestration.</p>
+        </div>
+        
+        <div class="flex gap-12" style="margin-top: 16px;">
+          <div class="card flex-1" style="text-align: center; padding: 12px;">
+            <p class="coral" style="font-size: 20px; font-weight: bold;">↑ Velocity</p>
+          </div>
+          <div class="card flex-1" style="text-align: center; padding: 12px;">
+            <p class="teal" style="font-size: 20px; font-weight: bold;">↓ Waste</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">10</span>
+  </div>
+
+  <!-- SLIDE 11: Complete Data Flow -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 16px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The Full Picture</p>
+      <h1 style="font-size: 36px;">Data Flow Map</h1>
+    </div>
+    
+    <div class="flex flex-col flex-1" style="padding-bottom: 16px;">
+      <!-- Table -->
+      <div class="card" style="padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+          <thead>
+            <tr style="background: rgba(255, 255, 255, 0.05);">
+              <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #4a4a6a; width: 18%;">Component</th>
+              <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #4a4a6a; width: 41%;">Sends Data To...</th>
+              <th style="padding: 12px 16px; text-align: left; border-bottom: 1px solid #4a4a6a; width: 41%;">Receives Data From...</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;"><span class="text-captura" style="font-weight: bold;">Captura</span></td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Sapien, Architecta (research), Impacto (routes)</td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">External Sources, Impacto (requests)</td>
+            </tr>
+            <tr style="background: rgba(255, 255, 255, 0.02);">
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;"><span class="text-sapien" style="font-weight: bold;">Sapien</span></td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Architecta, Impacto (benchmarks)</td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Captura, Impacto (cleansing signals)</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;"><span class="text-architecta" style="font-weight: bold;">Architecta</span></td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Fabrica (the blueprint)</td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Sapien, Captura (research)</td>
+            </tr>
+            <tr style="background: rgba(255, 255, 255, 0.02);">
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;"><span class="text-fabrica" style="font-weight: bold;">Fabrica</span></td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Impacto (the artefact)</td>
+              <td style="padding: 10px 16px; border-bottom: 1px solid #2a2a4a;" class="muted">Architecta</td>
+            </tr>
+            <tr>
+              <td style="padding: 10px 16px;"><span class="text-impacto" style="font-weight: bold;">Impacto</span></td>
+              <td style="padding: 10px 16px;" class="muted">Captura (data requests), Sapien</td>
+              <td style="padding: 10px 16px;" class="muted">Fabrica, Captura</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      
+      <!-- Error correction flow -->
+      <div class="card" style="margin-top: 16px; border: 1px solid #ff6b6b;">
+        <p style="font-size: 14px; font-weight: bold; margin-bottom: 10px;">Error Correction Flow</p>
+        <div class="flex items-center gap-12">
+          <div class="flex items-center gap-8">
+            <span class="pill impacto" style="font-size: 14px;">Impacto</span>
+            <span class="muted" style="font-size: 13px;">Detects</span>
+          </div>
+          <span style="color: #4a4a6a;">→</span>
+          <div class="flex items-center gap-8">
+            <span class="pill sapien" style="font-size: 14px;">Sapien</span>
+            <span class="muted" style="font-size: 13px;">Corrects</span>
+          </div>
+          <span style="color: #4a4a6a;">→</span>
+          <div class="flex items-center gap-8">
+            <span class="pill architecta" style="font-size: 14px;">Architecta</span>
+            <span class="muted" style="font-size: 13px;">Prevents</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">11</span>
+  </div>
+
+  <!-- SLIDE 12: KnowledgeOS as a Class -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 20px;">
+      <p class="teal uppercase" style="font-size: 13px; margin-bottom: 8px;">The Architecture</p>
+      <h1 style="font-size: 36px;">KnowledgeOS as a <span class="mono coral">Class</span></h1>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col justify-center" style="flex: 1;">
+        <div class="card" style="font-family: 'Courier New', monospace; font-size: 13px; line-height: 1.8; border: 1px solid #4ecdc4;">
+          <p><span class="teal">class</span> <span class="coral">KnowledgeOS</span> {</p>
+          <p style="padding-left: 20px;"><span class="muted">// Core components</span></p>
+          <p style="padding-left: 20px;"><span class="text-captura">captura</span>: DataLayer</p>
+          <p style="padding-left: 20px;"><span class="text-sapien">sapien</span>: KnowledgeLayer</p>
+          <p style="padding-left: 20px;"><span class="text-architecta">architecta</span>: SpecLayer</p>
+          <p style="padding-left: 20px;"><span class="text-fabrica">fabrica</span>: ExecutionLayer</p>
+          <p style="padding-left: 20px;"><span class="text-impacto">impacto</span>: ValueLayer</p>
+          <p style="padding-left: 20px;"><span style="color: #ffffff;">opera</span>: Orchestrator</p>
+          <p>}</p>
+        </div>
+        
+        <p class="muted" style="font-size: 13px; margin-top: 16px; line-height: 1.6;">
+          One class. One architecture. Deployed as unique instances for every organisation.
+        </p>
+      </div>
+      
+      <div class="flex flex-col gap-12" style="flex: 1;">
+        <div class="card" style="border-left: 4px solid #ff6b6b;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">One Instance Per Organisation</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">Each client gets their own deployed instance of KnowledgeOS, customized to their data, processes, and needs.</p>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #4ecdc4;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Projects Live Inside Instances</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">Within each organisation's instance, work is organized into projects—discrete units with their own context, specs, and artefacts.</p>
+        </div>
+        
+        <div class="card" style="border-left: 4px solid #feca57;">
+          <p style="font-size: 14px; font-weight: bold; margin-bottom: 6px;">Improve Core, Benefit All</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.5;">When we improve KnowledgeOS at the class level, every instance gets the upgrade. Compounding returns.</p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">12</span>
+  </div>
+
+  <!-- SLIDE 13: The Palindrom Instance -->
+  <div class="slide flex flex-col">
+    <div style="margin-bottom: 20px;">
+      <p class="yellow uppercase" style="font-size: 13px; margin-bottom: 8px;">Our Strategic Advantage</p>
+      <h1 style="font-size: 36px;">The Queen Bee Instance</h1>
+    </div>
+    
+    <div class="flex gap-24 flex-1">
+      <div class="flex flex-col justify-center" style="flex: 1;">
+        <!-- Diagram -->
+        <div class="card" style="text-align: center; padding: 24px; border: 2px solid #feca57;">
+          <div style="font-size: 36px; margin-bottom: 12px;">👑</div>
+          <h3 class="yellow" style="font-size: 20px; margin-bottom: 8px;">Palindrom Instance</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.5;">Our internal deployment of KnowledgeOS.<br/>The master instance that learns fastest.</p>
+        </div>
+        
+        <div class="flex justify-center" style="margin: 16px 0;">
+          <span style="font-size: 24px; color: #4a4a6a;">↓</span>
+        </div>
+        
+        <div class="flex gap-12 justify-center">
+          <div class="card" style="padding: 12px 16px; text-align: center;">
+            <p class="muted" style="font-size: 13px;">Client A</p>
+          </div>
+          <div class="card" style="padding: 12px 16px; text-align: center;">
+            <p class="muted" style="font-size: 13px;">Client B</p>
+          </div>
+          <div class="card" style="padding: 12px 16px; text-align: center;">
+            <p class="muted" style="font-size: 13px;">Client C</p>
+          </div>
+          <div class="card" style="padding: 12px 16px; text-align: center;">
+            <p class="muted" style="font-size: 13px;">Client ...</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="flex flex-col gap-16" style="flex: 1;">
+        <div>
+          <h3 style="font-size: 16px; margin-bottom: 12px;">Why "Queen Bee"?</h3>
+          <p class="muted" style="font-size: 13px; line-height: 1.7;">
+            The Palindrom instance is where we push hardest, experiment most, and learn fastest. Every improvement we make internally flows out to all client instances.
+          </p>
+        </div>
+        
+        <div class="card" style="background: rgba(254, 202, 87, 0.1); border: 1px solid rgba(254, 202, 87, 0.3);">
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 8px;">The Flywheel</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.6;">
+            We use KnowledgeOS → We get better at building KnowledgeOS → Clients benefit → We learn from their usage → Repeat.
+          </p>
+        </div>
+        
+        <div>
+          <p style="font-size: 13px; font-weight: bold; margin-bottom: 8px;">How do we decide what to improve?</p>
+          <p class="muted" style="font-size: 14px; line-height: 1.6;">
+            Opera observes all instances. Patterns emerge. Bottlenecks appear across deployments. We fix them at the class level.
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <span class="slide-number">13</span>
+  </div>
+
+  <!-- SLIDE 14: Our Moat -->
+  <div class="slide flex flex-col items-center justify-center" style="padding: 40px;">
+    <div class="corner-accent corner-tl"></div>
+    <div class="corner-accent corner-br"></div>
+    
+    <p class="teal uppercase" style="font-size: 14px; margin-bottom: 24px;">Our Defensibility</p>
+    
+    <h1 style="font-size: 48px; text-align: center; line-height: 1.2; margin-bottom: 32px;">
+      Talent <span class="muted" style="font-size: 36px;">+</span> Knowledge<span class="coral">OS</span>
+    </h1>
+    
+    <div class="flex gap-24" style="max-width: 700px;">
+      <div class="card flex-1" style="text-align: center; padding: 24px; border-top: 4px solid #4ecdc4;">
+        <div style="font-size: 32px; margin-bottom: 12px;">🧠</div>
+        <h3 class="teal" style="font-size: 16px; margin-bottom: 8px;">Talent</h3>
+        <p class="muted" style="font-size: 13px; line-height: 1.5;">The people who understand how to build, deploy, and improve the system.</p>
+      </div>
+      
+      <div class="card flex-1" style="text-align: center; padding: 24px; border-top: 4px solid #ff6b6b;">
+        <div style="font-size: 32px; margin-bottom: 12px;">⚙️</div>
+        <h3 class="coral" style="font-size: 16px; margin-bottom: 8px;">KnowledgeOS</h3>
+        <p class="muted" style="font-size: 13px; line-height: 1.5;">The system that compounds learnings across every deployment.</p>
+      </div>
+    </div>
+    
+    <div class="card" style="margin-top: 32px; padding: 16px 32px; background: rgba(255, 255, 255, 0.03); border: 1px dashed #4a4a6a;">
+      <p class="muted" style="font-size: 14px; text-align: center; line-height: 1.6;">
+        Others can hire talent. Others can build tools.<br/>
+        <span style="color: #ffffff;">Only we have both, learning together, compounding daily.</span>
+      </p>
+    </div>
+    
+    <span class="slide-number">14</span>
+  </div>
+
+  <!-- SLIDE 15: Closing -->
+  <div class="slide flex flex-col items-center justify-center" style="padding: 0;">
+    <div class="diagonal-coral"></div>
+    <div class="diagonal-teal"></div>
+    
+    <div style="position: relative; z-index: 1; text-align: center; max-width: 700px;">
+      <p class="teal uppercase" style="font-size: 14px; margin-bottom: 24px;">The Question</p>
+      
+      <h1 style="font-size: 42px; line-height: 1.3; margin-bottom: 40px;">
+        The question isn't <span class="coral">if</span>.<br/>
+        It's <span class="yellow">when</span>—and <span class="teal">who builds it first</span>.
+      </h1>
+    </div>
+    
+    <div style="position: absolute; bottom: 24px; text-align: center; width: 100%;">
+      <p class="subtle" style="font-size: 13px;">Palindrom • Internal Vision Document • 2026</p>
+    </div>
+  </div>
+
+</body>
+</html>
