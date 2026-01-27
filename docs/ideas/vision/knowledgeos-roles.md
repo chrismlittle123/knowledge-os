@@ -10,7 +10,7 @@ Each component of KnowledgeOS maps to a distinct organizational role:
 | **Sapien** | Knowledge Engineer | Structuring data into queryable knowledge |
 | **Architecta** | Product Engineer | Turning knowledge into specs/blueprints |
 | **Fabrica** | Software Engineer | Building artefacts from specs |
-| **Impacto** | Product Manager | Measuring outcomes, feeding learnings back |
+| **Lumina** | Product Manager | Illuminating outcomes, guiding what to build next |
 | **Opera** | Systems Engineer | Observing, orchestrating, optimizing the whole system |
 
 ## The Loop
@@ -45,8 +45,8 @@ Owns the spec layer. Applies intelligence and judgment to produce blueprints —
 ### Software Engineer (Fabrica)
 Owns the execution layer. Transforms specifications into artefacts — code, documents, reports, dashboards. Pure implementation.
 
-### Product Manager (Impacto)
-Owns the outcomes layer. Measures impact, detects expectation mismatches, defines what success means, prioritizes learnings.
+### Product Manager (Lumina)
+Owns the outcomes layer. The guiding light that illuminates impact, reveals expectation mismatches, and enlightens us on what to build next.
 
 ### Systems Engineer (Opera)
 Owns the orchestration layer. Monitors all component health and throughput, identifies bottlenecks, allocates resources dynamically, flags anomalies. The all-seeing eye.
