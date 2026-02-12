@@ -1,0 +1,37 @@
+{
+  "name": "architecta",
+  "version": "0.1.0",
+  "description": "The Intelligent Orchestrator - from intent to shipped code",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "turbo build",
+    "build:cli": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "dev:all": "turbo dev",
+    "lint": "turbo lint",
+    "lint:cli": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "typecheck": "turbo typecheck",
+    "clean": "turbo clean && rm -rf dist"
+  },
+  "dependencies": {
+    "@architecta/core": "workspace:*"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "puppeteer": "^24.36.0",
+    "tsx": "^4.0.0",
+    "turbo": "^2.0.0",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}

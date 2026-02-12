@@ -1,0 +1,11 @@
+[metadata]
+tier = "internal"
+status = "active"
+
+[extends]
+registry = "github:chrismlittle123/standards"
+rulesets = ["python-internal"]
+
+[process.ci]
+enabled = true
+require_workflows = ["ci.yml"]

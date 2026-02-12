@@ -1,0 +1,122 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: 'Environment to deploy to'
+        required: false
+        default: 'dev'
+        type: choice
+        options:
+          - dev
+          - staging
+          - prod
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  # GCP Configuration
+  GCP_PROJECT: ${{ vars.GCP_PROJECT || 'christopher-little-dev' }}
+  GCP_REGION: ${{ vars.GCP_REGION || 'europe-west2' }}
+
+  # Workload Identity
+  WORKLOAD_IDENTITY_PROVIDER: ${{ vars.WORKLOAD_IDENTITY_PROVIDER || 'projects/10492061315/locations/global/workloadIdentityPools/github-pool/providers/github-provider' }}
+  SERVICE_ACCOUNT: ${{ vars.GCP_SERVICE_ACCOUNT || 'github-actions@christopher-little-dev.iam.gserviceaccount.com' }}
+
+  # Pulumi
+  PULUMI_STATE_BUCKET: ${{ vars.PULUMI_STATE_BUCKET || 'gs://pulumi-state-christopher-little-dev' }}
+  PULUMI_STACK: ${{ inputs.environment || 'dev' }}
+
+  # Container
+  REPOSITORY: fabrica
+  IMAGE: control-plane
+
+jobs:
+  build-and-deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ env.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ env.SERVICE_ACCOUNT }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'pnpm'
+          cache-dependency-path: |
+            pnpm-lock.yaml
+            infra/pnpm-lock.yaml
+
+      - name: Install root dependencies
+        run: pnpm install
+
+      - name: Build application
+        run: pnpm build
+
+      - name: Install infra dependencies
+        working-directory: infra
+        run: pnpm install --ignore-workspace
+
+      - name: Install Pulumi
+        run: curl -fsSL https://get.pulumi.com | sh && echo "$HOME/.pulumi/bin" >> $GITHUB_PATH
+
+      - name: Setup Pulumi Stack
+        working-directory: infra
+        run: |
+          export PATH="$HOME/.pulumi/bin:$PATH"
+          pulumi login ${{ env.PULUMI_STATE_BUCKET }}
+          pulumi stack select ${{ env.PULUMI_STACK }} --create
+          pulumi config set gcp:project ${{ env.GCP_PROJECT }}
+          pulumi config set gcp:region ${{ env.GCP_REGION }}
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ""
+
+      - name: Create Artifact Registry
+        working-directory: infra
+        run: |
+          export PATH="$HOME/.pulumi/bin:$PATH"
+          pulumi up --yes --target "urn:pulumi:${{ env.PULUMI_STACK }}::fabrica::gcp:artifactregistry/repository:Repository::fabrica-repo" || true
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ""
+          GOOGLE_PROJECT: ${{ env.GCP_PROJECT }}
+
+      - name: Build and Push with Cloud Build
+        run: |
+          gcloud builds submit \
+            --config=cloudbuild.yaml \
+            --substitutions=_IMAGE_TAG=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:${{ github.sha }},_IMAGE_LATEST=${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT }}/${{ env.REPOSITORY }}/${{ env.IMAGE }}:latest \
+            .
+
+      - name: Deploy Infrastructure
+        working-directory: infra
+        run: |
+          export PATH="$HOME/.pulumi/bin:$PATH"
+          pulumi up --yes
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ""
+          GOOGLE_PROJECT: ${{ env.GCP_PROJECT }}
+
+      - name: Show Service URL
+        working-directory: infra
+        run: |
+          export PATH="$HOME/.pulumi/bin:$PATH"
+          echo "Service URL: $(pulumi stack output serviceUrl)"
+        env:
+          PULUMI_CONFIG_PASSPHRASE: ""

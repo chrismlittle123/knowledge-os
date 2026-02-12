@@ -1,0 +1,6 @@
+name: architecta-secrets
+runtime:
+  name: nodejs
+  options:
+    typescript: true
+description: Architecta secrets management

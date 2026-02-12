@@ -1,0 +1,11 @@
+[metadata]
+project = "monitoring"
+tier = "internal"
+
+[extends]
+registry = "github:chrismlittle123/standards"
+rulesets = ["typescript-internal"]
+
+[process.ci]
+enabled = true
+require_workflows = ["ci.yml"]

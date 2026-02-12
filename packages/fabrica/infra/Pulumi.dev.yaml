@@ -1,0 +1,7 @@
+# Development environment configuration
+# Copy this file and set values for your environment
+
+config:
+  gcp:project: christopher-little-dev
+  gcp:region: europe-west2
+encryptionsalt: v1:Aaziyy3vY2Q=:v1:A498NxpZvVI3PLSA:wvetNOJMiiqVWpnElPkN4cbotoWLdA==

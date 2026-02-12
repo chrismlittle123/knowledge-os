@@ -1,0 +1,14 @@
+{
+  "runtime": "docker",
+  "docker": {
+    "image": "fabrica-agent:latest",
+    "memoryMB": 2048,
+    "cpus": 2,
+    "timeoutSeconds": 7200,
+    "networkMode": "bridge"
+  },
+  "mcpServers": {},
+  "defaults": {
+    "model": "claude-sonnet-4-5-20250929"
+  }
+}

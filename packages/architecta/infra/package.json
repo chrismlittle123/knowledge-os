@@ -1,0 +1,22 @@
+{
+  "name": "@architecta/infra",
+  "version": "0.1.0",
+  "description": "Infrastructure for Architecta secrets",
+  "main": "index.ts",
+  "scripts": {
+    "deploy:dev": "ENVIRONMENT=dev pulumi up --stack dev --yes",
+    "deploy:stag": "ENVIRONMENT=stag pulumi up --stack stag --yes",
+    "deploy:prod": "ENVIRONMENT=prod pulumi up --stack prod --yes",
+    "preview:dev": "ENVIRONMENT=dev pulumi preview --stack dev",
+    "preview:stag": "ENVIRONMENT=stag pulumi preview --stack stag",
+    "preview:prod": "ENVIRONMENT=prod pulumi preview --stack prod"
+  },
+  "dependencies": {
+    "@palindrom-ai/infra": "github:chrismlittle123/infra",
+    "@pulumi/pulumi": "^3.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.4.0"
+  }
+}

@@ -1,0 +1,20 @@
+# Architecta Standards Configuration
+# https://github.com/standards-kit/conform
+
+[metadata]
+project = "architecta"
+tier = "prototype"
+status = "active"
+
+[code.linting.eslint]
+enabled = true
+ignore = [
+  "**/node_modules/**",
+  "**/.next/**",
+  "**/dist/**",
+  "**/.turbo/**",
+  "**/next.config.js",
+  "**/postcss.config.js",
+  "**/tailwind.config.ts",
+  "**/scripts/**"
+]

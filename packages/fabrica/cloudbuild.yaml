@@ -1,0 +1,24 @@
+steps:
+  - name: 'gcr.io/cloud-builders/docker'
+    args:
+      - 'build'
+      - '-t'
+      - '${_IMAGE_TAG}'
+      - '-t'
+      - '${_IMAGE_LATEST}'
+      - '-f'
+      - 'packages/control-plane/Dockerfile'
+      - '.'
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_IMAGE_TAG}']
+
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', '${_IMAGE_LATEST}']
+
+substitutions:
+  _IMAGE_TAG: 'europe-west2-docker.pkg.dev/christopher-little-dev/fabrica/control-plane:latest'
+  _IMAGE_LATEST: 'europe-west2-docker.pkg.dev/christopher-little-dev/fabrica/control-plane:latest'
+
+options:
+  logging: CLOUD_LOGGING_ONLY

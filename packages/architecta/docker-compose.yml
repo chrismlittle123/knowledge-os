@@ -1,0 +1,10 @@
+services:
+  architecta:
+    build: .
+    stdin_open: true
+    tty: true
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+    volumes:
+      - ${TARGET_REPO:-.}:/workspace
+    working_dir: /workspace

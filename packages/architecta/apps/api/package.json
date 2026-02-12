@@ -1,0 +1,34 @@
+{
+  "name": "@architecta/api",
+  "version": "0.1.0",
+  "description": "Architecta API server",
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "eslint src/",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@architecta/core": "workspace:*",
+    "@fastify/cors": "^10.0.0",
+    "@google-cloud/secret-manager": "^5.6.0",
+    "@palindrom/fastify-api": "workspace:*",
+    "dotenv": "^17.2.3",
+    "fastify": "^5.2.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@types/node": "^20.0.0",
+    "eslint": "^9.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.4.0",
+    "typescript-eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

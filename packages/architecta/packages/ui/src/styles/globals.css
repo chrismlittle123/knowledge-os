@@ -1,0 +1,249 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   THEME: BUSINESS (Stripe-inspired)
+   Professional, trustworthy, polished
+   Based on: https://stripe.com, https://mobbin.com/colors/brand/stripe
+   ============================================ */
+@layer base {
+  :root {
+    /* Stripe: Blue-gray tinted backgrounds, signature purple */
+    --background: 210 20% 98%;       /* #F6F9FC - Stripe's "Black Squeeze" */
+    --foreground: 226 57% 15%;       /* #0A2540 - Stripe's "Downriver" */
+    --card: 0 0% 100%;               /* Pure white cards */
+    --card-foreground: 228 14% 22%;  /* #30313d - Stripe's text color */
+    --popover: 0 0% 100%;
+    --popover-foreground: 228 14% 22%;
+    --primary: 243 100% 68%;         /* #635BFF - Stripe's signature purple */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 228 14% 22%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 220 9% 46%;
+    --accent: 172 66% 50%;           /* Teal - Stripe's secondary accent */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 350 89% 50%;      /* #df1b41 - Stripe's danger */
+    --destructive-foreground: 0 0% 100%;
+    --success: 172 66% 50%;          /* Teal for success states */
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;           /* Amber */
+    --warning-foreground: 0 0% 0%;
+    --info: 210 80% 50%;             /* Blue */
+    --info-foreground: 0 0% 100%;
+    --border: 213 20% 91%;           /* Blue-gray tinted border */
+    --input: 0 0% 100%;              /* Pure white inputs for contrast */
+    --ring: 243 100% 68%;
+    --ring-offset: 210 20% 98%;      /* Matches background */
+    --radius: 0.25rem;               /* Stripe uses small radius (4px) */
+
+    /* Gradient support */
+    --gradient-start: 243 100% 68%;  /* Stripe purple */
+    --gradient-end: 280 87% 65%;     /* Purple-pink */
+
+    /* Shadow tokens */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-card: 0 2px 5px -1px rgb(0 0 0 / 0.05), 0 1px 3px -1px rgb(0 0 0 / 0.1);
+    --shadow-elevated: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+    /* Chart colors for data visualization */
+    --chart-1: 243 100% 68%;         /* Stripe purple */
+    --chart-2: 172 66% 50%;          /* Teal */
+    --chart-3: 38 92% 50%;           /* Amber */
+    --chart-4: 350 89% 50%;          /* Red */
+    --chart-5: 210 80% 50%;          /* Blue */
+
+    /* Extended bright color palette - Modern SaaS inspired */
+    /* Purple scale (primary - Stripe signature) */
+    --purple-50: 250 100% 98%;
+    --purple-100: 248 100% 94%;
+    --purple-200: 246 100% 88%;
+    --purple-300: 244 100% 80%;
+    --purple-400: 243 100% 72%;
+    --purple-500: 243 100% 68%;
+    --purple-600: 243 95% 60%;
+    --purple-700: 243 85% 52%;
+    --purple-800: 243 80% 42%;
+    --purple-900: 243 75% 32%;
+
+    /* Teal scale (accent) */
+    --teal-50: 170 80% 95%;
+    --teal-100: 170 75% 88%;
+    --teal-200: 172 70% 75%;
+    --teal-300: 172 68% 62%;
+    --teal-400: 172 66% 50%;
+    --teal-500: 172 70% 42%;
+    --teal-600: 172 75% 35%;
+    --teal-700: 172 80% 28%;
+    --teal-800: 172 85% 22%;
+    --teal-900: 172 90% 15%;
+
+    /* Blue scale (info - bright electric) */
+    --blue-50: 210 100% 97%;
+    --blue-100: 210 100% 92%;
+    --blue-200: 210 100% 82%;
+    --blue-300: 210 95% 70%;
+    --blue-400: 210 90% 58%;
+    --blue-500: 210 85% 50%;
+    --blue-600: 210 90% 42%;
+    --blue-700: 210 95% 35%;
+    --blue-800: 210 100% 28%;
+    --blue-900: 210 100% 20%;
+
+    /* Green scale (success - vibrant) */
+    --green-50: 145 80% 96%;
+    --green-100: 145 75% 88%;
+    --green-200: 148 70% 75%;
+    --green-300: 150 72% 60%;
+    --green-400: 152 75% 48%;
+    --green-500: 155 80% 40%;
+    --green-600: 158 85% 32%;
+    --green-700: 160 88% 25%;
+    --green-800: 162 90% 18%;
+    --green-900: 165 92% 12%;
+
+    /* Red scale (destructive - Stripe red) */
+    --red-50: 350 100% 97%;
+    --red-100: 350 100% 92%;
+    --red-200: 350 95% 82%;
+    --red-300: 350 92% 70%;
+    --red-400: 350 90% 58%;
+    --red-500: 350 89% 50%;
+    --red-600: 350 85% 42%;
+    --red-700: 350 80% 35%;
+    --red-800: 350 75% 28%;
+    --red-900: 350 70% 20%;
+
+    /* Orange scale (warm accent) */
+    --orange-50: 30 100% 96%;
+    --orange-100: 30 100% 88%;
+    --orange-200: 28 100% 78%;
+    --orange-300: 26 100% 65%;
+    --orange-400: 24 100% 55%;
+    --orange-500: 22 100% 48%;
+    --orange-600: 20 95% 42%;
+    --orange-700: 18 90% 35%;
+    --orange-800: 16 85% 28%;
+    --orange-900: 14 80% 20%;
+
+    /* Yellow scale (bright warning) */
+    --yellow-50: 50 100% 96%;
+    --yellow-100: 48 100% 88%;
+    --yellow-200: 46 100% 78%;
+    --yellow-300: 44 100% 65%;
+    --yellow-400: 42 100% 55%;
+    --yellow-500: 40 100% 48%;
+    --yellow-600: 38 95% 42%;
+    --yellow-700: 36 90% 35%;
+    --yellow-800: 34 85% 28%;
+    --yellow-900: 32 80% 20%;
+
+    /* Pink scale (accent) */
+    --pink-50: 330 100% 97%;
+    --pink-100: 330 100% 92%;
+    --pink-200: 330 95% 82%;
+    --pink-300: 330 90% 70%;
+    --pink-400: 330 88% 58%;
+    --pink-500: 330 85% 50%;
+    --pink-600: 330 80% 42%;
+    --pink-700: 330 75% 35%;
+    --pink-800: 330 70% 28%;
+    --pink-900: 330 65% 20%;
+
+    /* Cyan scale (bright accent) */
+    --cyan-50: 185 100% 96%;
+    --cyan-100: 185 95% 88%;
+    --cyan-200: 188 90% 78%;
+    --cyan-300: 190 88% 65%;
+    --cyan-400: 192 85% 52%;
+    --cyan-500: 195 90% 45%;
+    --cyan-600: 198 95% 38%;
+    --cyan-700: 200 100% 32%;
+    --cyan-800: 202 100% 25%;
+    --cyan-900: 205 100% 18%;
+
+    /* Gray scale (neutral with blue tint) */
+    --gray-50: 210 40% 98%;
+    --gray-100: 210 35% 94%;
+    --gray-200: 210 25% 88%;
+    --gray-300: 210 20% 78%;
+    --gray-400: 210 15% 60%;
+    --gray-500: 210 12% 45%;
+    --gray-600: 210 15% 35%;
+    --gray-700: 210 20% 25%;
+    --gray-800: 210 25% 15%;
+    --gray-900: 210 30% 8%;
+
+    /* Status colors - vibrant and clear */
+    --status-completed: 152 75% 48%;     /* Bright green */
+    --status-completed-bg: 152 75% 48% / 0.12;
+    --status-processing: 243 100% 68%;   /* Purple */
+    --status-processing-bg: 243 100% 68% / 0.12;
+    --status-pending: 38 92% 50%;        /* Amber */
+    --status-pending-bg: 38 92% 50% / 0.12;
+    --status-failed: 350 89% 50%;        /* Red */
+    --status-failed-bg: 350 89% 50% / 0.12;
+    --status-refunded: 210 85% 50%;      /* Blue */
+    --status-refunded-bg: 210 85% 50% / 0.12;
+    --status-cancelled: 210 15% 45%;     /* Gray */
+    --status-cancelled-bg: 210 15% 45% / 0.1;
+  }
+
+  /* Dark mode */
+  .dark {
+    --background: 222 47% 8%;
+    --foreground: 210 40% 95%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 40% 95%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 40% 95%;
+    --primary: 243 100% 72%;         /* Slightly brighter purple for dark */
+    --primary-foreground: 0 0% 100%;
+    --secondary: 222 47% 15%;
+    --secondary-foreground: 210 40% 95%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 210 30% 55%;
+    --accent: 172 66% 55%;           /* Brighter teal for dark */
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 172 66% 55%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 55%;
+    --warning-foreground: 0 0% 0%;
+    --info: 210 80% 60%;
+    --info-foreground: 0 0% 100%;
+    --border: 222 47% 20%;
+    --input: 222 47% 11%;
+    --ring: 243 100% 72%;
+    --ring-offset: 222 47% 8%;
+
+    /* Gradient - brighter for dark */
+    --gradient-start: 243 100% 72%;
+    --gradient-end: 280 87% 70%;
+
+    /* Shadows - more subtle in dark mode */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.2);
+    --shadow-card: 0 2px 5px -1px rgb(0 0 0 / 0.3), 0 1px 3px -1px rgb(0 0 0 / 0.2);
+    --shadow-elevated: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+
+    /* Chart colors - brighter for dark mode */
+    --chart-1: 243 100% 72%;
+    --chart-2: 172 66% 55%;
+    --chart-3: 38 92% 60%;
+    --chart-4: 0 72% 60%;
+    --chart-5: 210 80% 60%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Helvetica Neue", sans-serif;
+    letter-spacing: -0.003em;
+  }
+}

@@ -1,0 +1,6 @@
+name: fabrica
+runtime:
+  name: nodejs
+  options:
+    typescript: true
+description: Fabrica infrastructure - Cloud Run deployment

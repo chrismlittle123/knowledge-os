@@ -1,0 +1,102 @@
+{
+  "$schema": "./fabrica.config.schema.json",
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp"]
+    },
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "@linear/mcp-server"],
+      "env": {
+        "LINEAR_API_KEY": "${LINEAR_API_KEY}"
+      }
+    },
+    "claude-flow": {
+      "command": "npx",
+      "args": ["claude-flow@alpha", "mcp", "start"]
+    },
+    "aws": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-aws"],
+      "env": {
+        "AWS_PROFILE": "${AWS_PROFILE}",
+        "AWS_REGION": "${AWS_REGION}"
+      }
+    },
+    "gcp": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-gcp"],
+      "env": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "${GOOGLE_APPLICATION_CREDENTIALS}",
+        "GOOGLE_CLOUD_PROJECT": "${GOOGLE_CLOUD_PROJECT}"
+      }
+    }
+  },
+  "aws": {
+    "defaultProfile": "dev",
+    "profiles": [
+      {
+        "name": "dev",
+        "accountId": "111111111111",
+        "region": "us-east-1",
+        "auth": {
+          "type": "profile",
+          "profileName": "dev"
+        }
+      },
+      {
+        "name": "staging",
+        "accountId": "222222222222",
+        "region": "us-east-1",
+        "auth": {
+          "type": "role",
+          "roleArn": "arn:aws:iam::222222222222:role/FabricaAccess"
+        }
+      },
+      {
+        "name": "prod",
+        "accountId": "333333333333",
+        "region": "us-east-1",
+        "auth": {
+          "type": "role",
+          "roleArn": "arn:aws:iam::333333333333:role/FabricaAccess",
+          "externalId": "fabrica-external-id"
+        }
+      }
+    ]
+  },
+  "gcp": {
+    "defaultProfile": "dev",
+    "profiles": [
+      {
+        "name": "dev",
+        "projectId": "my-project-dev",
+        "auth": {
+          "type": "adc"
+        }
+      },
+      {
+        "name": "staging",
+        "projectId": "my-project-staging",
+        "auth": {
+          "type": "service-account",
+          "keyFile": "/path/to/staging-sa-key.json"
+        }
+      },
+      {
+        "name": "prod",
+        "projectId": "my-project-prod",
+        "auth": {
+          "type": "impersonate",
+          "targetServiceAccount": "fabrica@my-project-prod.iam.gserviceaccount.com"
+        }
+      }
+    ]
+  },
+  "defaults": {
+    "model": "sonnet",
+    "timeout": 1800000,
+    "workDir": "/workspace"
+  }
+}
