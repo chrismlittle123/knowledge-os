@@ -70,13 +70,15 @@ The API exposes a **source-agnostic resource model**. Agents interact with resou
 
 | Resource Type | Description | Example Sources |
 |---|---|---|
-| `message` | A communication between people | Slack messages, emails, Notion comments |
-| `document` | A long-form piece of content | Notion pages, Google Docs, Confluence pages |
+| `message` | A communication between people | Slack messages, emails, Notion comments, GitHub issue/PR comments, inline code review comments |
+| `document` | A long-form piece of content | Notion pages, Google Docs, Confluence pages, GitHub READMEs, docs folders, ADRs, wiki pages |
 | `file` | A binary or stored file | Google Drive files, Slack file uploads, email attachments |
-| `task` | A work item with status | Jira issues, Notion database items, Asana tasks |
-| `event` | A calendar event | Google Calendar, Outlook |
-| `thread` | An ordered collection of messages | Slack threads, email threads |
+| `task` | A work item with status | Jira issues, Notion database items, Asana tasks, GitHub issues |
+| `event` | A calendar or system event | Google Calendar, Outlook, GitHub commits, Action runs, releases |
+| `thread` | An ordered collection of messages | Slack threads, email threads, GitHub Discussions |
 | `contact` | A person or entity | Google Contacts, CRM records |
+| `pull_request` | A code change with review workflow | GitHub pull requests (including review comments, status, linked issues) |
+| `code` | A source code or config file | GitHub source files (selectively indexed — see [GitHub extension spec](./github-knowledge-layer.md)) |
 
 ### Unified Resource Schema
 
@@ -352,7 +354,12 @@ health() → HealthStatus
 | Google Drive | Push notifications (Changes API) + polling | ~30 seconds |
 | Notion | Polling (no webhook support for all changes) | ~30-60 seconds |
 | Jira | Webhooks + polling fallback | ~10 seconds |
-| GitHub | Webhooks | ~5 seconds |
+| GitHub (issues, PRs) | Webhooks + polling fallback | ~5 seconds |
+| GitHub (docs, Tier 1) | Webhook on push to default branch, diff-based re-index | ~10-30 seconds |
+| GitHub (source code, Tier 2) | No sync — fetched live on demand | Real-time |
+| GitHub (wiki) | Polling (limited webhook support) | ~60 seconds |
+
+> **Note:** GitHub uses a tiered indexing strategy due to the volume and varying value of its content. See the [GitHub Knowledge Layer extension spec](./github-knowledge-layer.md) for full details on the three-tier approach, cross-referencing, dual permission enforcement, and write safeguards.
 
 ### Adding a New Connector
 
@@ -557,10 +564,12 @@ Start simple. PostgreSQL handles everything at 8 people. When the index grows pa
 - Basic permission rules (per-agent, per-source)
 
 ### Phase 2 — Expand Sources
+- GitHub connector with tiered indexing (Tier 1 docs, Tier 2 live code, Tier 3 issues/PRs) — see [GitHub extension spec](./github-knowledge-layer.md)
 - Gmail / Google Workspace connector
 - Google Drive connector
 - Jira connector
-- Granular permission conditions (channel-level, workspace-level, project-level)
+- Granular permission conditions (channel-level, workspace-level, project-level, repo-level)
+- Cross-source relationship indexing (e.g. GitHub PR → Slack thread → Jira ticket)
 
 ### Phase 3 — Harden
 - Write-back support across all connectors
